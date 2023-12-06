@@ -1,7 +1,7 @@
 
 
 class ChatbotUI:
-    def __init__():
+    def __init__(self):
         """Initialize the chatbot UI"""
         pass
 
@@ -15,32 +15,6 @@ class ChatbotUI:
     def dialog_design():
         pass
 
-
-import streamlit as st
-
-# Function to simulate a simple chatbot
-def simple_chatbot(user_input):
-    # Add your chatbot logic here
-    # For simplicity, let's just echo back the user input
-    return f"You: {user_input}"
-
-# Streamlit UI
-def main():
-    st.title("Simple Chatbot")
-
-    # Text input for user to enter messages
-    user_input = st.text_input("Enter your message:")
-
-    # Button to submit the message
-    if st.button("Send"):
-        # Get the chatbot's response
-        bot_response = simple_chatbot(user_input)
-
-        # Display the chatbot's response
-        st.text_area("Chatbot:", value=bot_response, height=100)
-
-if __name__ == "__main__":
-    main()
 
 
 
