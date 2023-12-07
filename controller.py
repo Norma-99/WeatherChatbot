@@ -3,13 +3,17 @@
 
 ### IMPORTS
 import streamlit as st
+from rasa.core.agent import Agent
+import asyncio
 
 
 class ChatbotController:
-    def __init__(self):
+    def __init__(self, model_path="./models/20231207-111123-ragged-meander.tar.gz"):
         """initialize the chatbot framework"""
+        self.agent = Agent.load(model_path)
         self.responses = dict()
         st.title("Weather Chatbot")
+
         with st.chat_message(name="assistant"):
             st.markdown("Hey I am your AI based assistant, what can I help you with?")
 
@@ -31,12 +35,20 @@ class ChatbotController:
             st.markdown(prompt)
 
 
-    def get_chatbot_response(self, prompt:str) -> None:
+    async def get_chatbot_response(self, prompt:str) -> None:
+        response = await self.agent.handle_text(prompt)
+        bot_response = response # response[0]['text']
+
         with st.chat_message("assistant"):
-                ### DO HERE THE CHATBOT LOGIC
-                st.session_state.messages.append({"role": "assistant", "content": prompt})
-                self.update_responses(user_input=prompt, response=prompt)
-                st.markdown(prompt)
+            st.session_state.messages.append({"role": "assistant", "content": bot_response})
+            self.update_responses(user_input=prompt, response=bot_response)
+            st.markdown(bot_response)
+            
+        # with st.chat_message("assistant"):
+        #         ### DO HERE THE CHATBOT LOGIC
+        #         st.session_state.messages.append({"role": "assistant", "content": prompt})
+        #         self.update_responses(user_input=prompt, response=prompt)
+        #         st.markdown(prompt)
 
 
     def get_final_visualization_dashboard():
@@ -53,4 +65,4 @@ class ChatbotController:
         # Get user input and chatbot output
         if prompt := st.chat_input("Type your query"):
             self.get_user_input(prompt=prompt)
-            self.get_chatbot_response(prompt=prompt)
+            asyncio.run(self.get_chatbot_response(prompt=prompt))

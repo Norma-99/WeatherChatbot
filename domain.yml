@@ -1,17 +1,53 @@
 version: "3.1"
 
+entities:
+  - location
+  - days
+
+slots:
+  location:
+    type: text
+    influence_conversation: false
+    mappings: 
+    - type: custom
+  days:
+    type: float
+    influence_conversation: false
+    mappings: 
+    - type: custom
+
 intents:
   - greet
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - inform
+  - ask_temperature
+  - ask_precipitation
+  - ask_wind
+  - ask_humidity
+  - ask_sunrise_sunset
+  - ask_location
+  - ask_days
+
+actions:
+- action_greet
+- action_goodbye
+- action_get_temperature
+- action_get_precipitation
+- action_get_wind
+- action_get_humidity
+- action_get_sunrise_sunset
+- action_get_location
+- action_get_days
+- action_get_weather_type
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: Hey! How may i assist you?
+  - text: What I can do for you today?
+  - text: Hi, there !!
+  - text: Nice to meet you.
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -20,15 +56,38 @@ responses:
   utter_did_that_help:
   - text: "Did that help you?"
 
-  utter_happy:
-  - text: "Great, carry on!"
-
   utter_goodbye:
   - text: "Bye"
+  - text: "Goodbye"
+  - text: "Bye, it was a pleasure assisting you"
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
+  utter_ask_temperature:
+  - text: "Sure, I can help you with the current temperature. Could you please specify the location or date?"
+
+  utter_ask_precipitation:
+  - text: "Certainly! Are you looking for the precipitation forecast? Please provide the location or date."
+
+  utter_ask_wind:
+  - text: "Got it! To help you with the wind conditions, could you please provide the location or date?"
+
+  utter_ask_humidity:
+  - text: "Sure thing! For humidity information, please specify the location or date you're interested in."
+
+  utter_ask_sunrise_sunset:
+  - text: "Sure, I can provide details about the sunrise and sunset. Could you please specify the location or date?"
+
+  utter_ask_location:
+  - text: "Sure, I can provide the weather information for a specific location. Please specify the location you're interested in."
+
+  utter_ask_days:
+  - text: "Got it! How many days into the future would you like to know the weather forecast?"
+
+  utter_ask_weather_type:
+  - text: "What type of weather information are you interested in? You can ask about temperature, precipitation, wind, humidity, or sunrise and sunset."
+  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

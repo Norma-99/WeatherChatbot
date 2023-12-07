@@ -9,19 +9,13 @@ nlu:
     - hello there
     - good morning
     - good evening
-    - moin
     - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
+    - good morning
+    - good evening
     - good afternoon
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
     - good night
     - bye
     - goodbye
@@ -49,43 +43,68 @@ nlu:
     - no way
     - not really
 
-- intent: mood_great
+- intent: ask_weather
   examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+    - what's the weather
+    - what is the temperature today
+    - what is the temperature
+    - i want to know the temperature
+    - i want to know the weather today
+    - tell me the weather forecast
+    - hows the weather today
 
-- intent: mood_unhappy
+- intent: inform
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - {"entity": "weather_type", "value": "temperature"}
+    - {"entity": "weather_type", "value": "precipitation"}
+    - {"entity": "weather_type", "value": "wind"}
+    - {"entity": "weather_type", "value": "humidity"}
+    - {"entity": "weather_type", "value": "sunrise_sunset"}
+    
+- intent: ask_location
+  examples: |
+    - Show me what's the weather in [Paris](location)
+    - The weather condition in [Italy](location)
+    - How's the weather in [Chennai](location)
+    - How's [Berlin](location) today
+    - What is the weather in [Delhi](location)
+    - Temperature in [Amsterdam](location)
+    - tell me the temperature at [Ohio](location)
+    - What is the weather like in [location]?
+    - Tell me about the weather conditions in [location].
 
-- intent: bot_challenge
+- intent: ask_temperature
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - What is the current temperature?
+    - Tell me the temperature right now.
+    - How hot is it outside?
+
+- intent: ask_precipitation
+  examples: |
+    - Is it going to rain today?
+    - What's the precipitation forecast?
+    - Will it snow?
+
+- intent: ask_wind
+  examples: |
+    - What is the wind speed?
+    - Tell me about the wind conditions.
+    - Is it windy today?
+
+- intent: ask_humidity
+  examples: |
+    - What is the humidity level?
+    - How humid is it outside?
+    - Tell me about the humidity.
+
+- intent: ask_sunrise_sunset
+  examples: |
+    - When is the sunrise?
+    - What time is sunset today?
+    - Tell me about the sunrise and sunset.
+
+- intent: ask_days
+  examples: |
+    - What is the weather forecast for the next [days] days?
+    - Tell me about the weather in the next [days] days.
+    - Weather forecast for the next [days] days.

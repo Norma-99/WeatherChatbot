@@ -1,30 +1,97 @@
 version: "3.1"
 
 stories:
-
-- story: happy path
+- story: get_weather_information
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
+  - intent: inform
+    entities:
+    - weather_type: "temperature"
+  - action: utter_ask_location
+
+  - intent: inform
+    entities:
+    - location: "New York"
+  - action: action_get_location
+
+  - intent: ask_days
+  - action: utter_ask_days
+
+  - intent: inform
+    entities:
+    - days: 3
+  - action: action_get_days
+
   - intent: affirm
-  - action: utter_happy
+  - action: utter_ask_weather_type
 
-- story: sad path 2
+  - intent: inform
+    entities:
+    - weather_type: "precipitation"
+  - action: action_get_precipitation
+
+
+- story: get_weather_information_wind
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+
+  - intent: inform
+    entities:
+    - weather_type: "wind"
+  - action: utter_ask_location
+
+  - intent: inform
+    entities:
+    - location: "San Francisco"
+  - action: action_get_location
+
+  - intent: ask_days
+  - action: utter_ask_days
+
+  - intent: inform
+    entities:
+    - days: 5
+  - action: action_get_days
+
+  - intent: affirm
+  - action: utter_ask_weather_type
+
+  - intent: inform
+    entities:
+    - weather_type: "wind"
+  - action: action_get_wind
+
+
+- story: get_weather_information_sunrise_sunset
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+  - intent: inform
+    entities:
+    - weather_type: "sunrise_sunset"
+  - action: utter_ask_location
+
+  - intent: inform
+    entities:
+    - location: "London"
+  - action: action_get_location
+
+  - intent: ask_days
+  - action: utter_ask_days
+
+  - intent: inform
+    entities:
+    - days: 7
+  - action: action_get_days
+
+  - intent: affirm
+  - action: utter_ask_weather_type
+
+  - intent: inform
+    entities:
+    - weather_type: "sunrise_sunset"
+  - action: action_get_sunrise_sunset
