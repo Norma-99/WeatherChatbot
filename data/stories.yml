@@ -1,97 +1,51 @@
 version: "3.1"
 
+
 stories:
-- story: get_weather_information
+- story: happy path
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_weather
+  - intent: inform_location
+  - action: utter_location
+  - slot_was_set:
+    - location: "New York"  # Replace with the extracted location
+  - intent: inform_days
+  - action: utter_days
+  - slot_was_set:
+    - days: "7"  # Replace with the extracted number of days
+  - intent: inform_temperature
+  - action: utter_temperature
+  - slot_was_set:
+    - temperature: "yes"  # Replace with the extracted temperature preference
+  - intent: inform_precipitation
+  - action: utter_precipitation
+  - slot_was_set:
+    - precipitation: "yes"
+  - intent: inform_wind
+  - action: utter_wind
+  - slot_was_set:
+    - wind: "yes"  # Replace with the extracted temperature preference
+  - intent: inform_humidity
+  - action: utter_humidity
+  - slot_was_set:
+    - humidity: "yes"  # Replace with the extracted temperature preference
+  - intent: inform_sunrise_sunset
+  - action: utter_sunrise_sunset
+  - slot_was_set:
+    - sunrise_sunset: "yes"  # Replace with the extracted temperature preference
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_dashboard
 
-  - intent: inform
-    entities:
-    - weather_type: "temperature"
-  - action: utter_ask_location
-
-  - intent: inform
-    entities:
-    - location: "New York"
-  - action: action_get_location
-
-  - intent: ask_days
-  - action: utter_ask_days
-
-  - intent: inform
-    entities:
-    - days: 3
-  - action: action_get_days
-
-  - intent: affirm
-  - action: utter_ask_weather_type
-
-  - intent: inform
-    entities:
-    - weather_type: "precipitation"
-  - action: action_get_precipitation
-
-
-- story: get_weather_information_wind
+- story: unhappy path
   steps:
+  - intent: deny
   - intent: greet
   - action: utter_greet
-
-  - intent: inform
-    entities:
-    - weather_type: "wind"
-  - action: utter_ask_location
-
-  - intent: inform
-    entities:
-    - location: "San Francisco"
-  - action: action_get_location
-
-  - intent: ask_days
-  - action: utter_ask_days
-
-  - intent: inform
-    entities:
-    - days: 5
-  - action: action_get_days
-
-  - intent: affirm
-  - action: utter_ask_weather_type
-
-  - intent: inform
-    entities:
-    - weather_type: "wind"
-  - action: action_get_wind
+  - action: utter_weather
+  - intent: goodbye
+  - action: utter_only_weather_goodbye
 
 
-- story: get_weather_information_sunrise_sunset
-  steps:
-  - intent: greet
-  - action: utter_greet
-
-  - intent: inform
-    entities:
-    - weather_type: "sunrise_sunset"
-  - action: utter_ask_location
-
-  - intent: inform
-    entities:
-    - location: "London"
-  - action: action_get_location
-
-  - intent: ask_days
-  - action: utter_ask_days
-
-  - intent: inform
-    entities:
-    - days: 7
-  - action: action_get_days
-
-  - intent: affirm
-  - action: utter_ask_weather_type
-
-  - intent: inform
-    entities:
-    - weather_type: "sunrise_sunset"
-  - action: action_get_sunrise_sunset

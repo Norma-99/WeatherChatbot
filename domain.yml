@@ -1,92 +1,94 @@
 version: "3.1"
 
+intents:
+  - greet
+  - affirm
+  - deny
+  - inform_location
+  - inform_days
+  - inform_temperature
+  - inform_precipitation
+  - inform_wind
+  - inform_humidity
+  - inform_sunrise_sunset
+  - goodbye
+
 entities:
   - location
   - days
+  - temperature
+  - precipitation
+  - wind
+  - humidity
+  - sunrise_sunset
+
+responses:
+  utter_greet:
+    - text: "Hello, I will be your chatbot today." 
+  utter_weather:  
+    - text: "Would you like to know the weather?"
+  utter_only_weather_goodbye:
+    - text: "I can only provide weather information. Goodbye!"
+  utter_location:
+    - text: "Where would you like to know the weather?"
+  utter_days:
+    - text: "For how many days in the future would you like to know the weather?"
+  utter_temperature:
+    - text: "Would you like to know the temperatures?"
+  utter_precipitation:
+    - text: "Would you like to know the precipitation?"
+  utter_wind:
+    - text: "Would you like to know the wind?"
+  utter_humidity:
+    - text: "Would you like to know the humidity?"
+  utter_sunrise_sunset:
+    - text: "Would you like to know at what time is the sunrise and sunset?"
+  utter_goodbye:
+    - text: "Thank you. Please wait while I get your weather dashboard."
+  utter_dashboard:
+    - text: "Print weather dashboard. It was a pleasure assisting you."
 
 slots:
   location:
     type: text
-    influence_conversation: false
     mappings: 
-    - type: custom
+    - type: from_text
   days:
-    type: float
-    influence_conversation: false
+    type: text
     mappings: 
-    - type: custom
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - inform
-  - ask_temperature
-  - ask_precipitation
-  - ask_wind
-  - ask_humidity
-  - ask_sunrise_sunset
-  - ask_location
-  - ask_days
+    - type: from_text
+  temperature:
+    type: text
+    mappings: 
+    - type: from_text
+  precipitation:
+    type: text
+    mappings: 
+    - type: from_text
+  wind:
+    type: text
+    mappings: 
+    - type: from_text
+  humidity:
+    type: text
+    mappings: 
+    - type: from_text
+  sunrise_sunset:
+    type: text
+    mappings: 
+    - type: from_text
 
 actions:
-- action_greet
-- action_goodbye
-- action_get_temperature
-- action_get_precipitation
-- action_get_wind
-- action_get_humidity
-- action_get_sunrise_sunset
-- action_get_location
-- action_get_days
-- action_get_weather_type
-
-responses:
-  utter_greet:
-  - text: Hey! How may i assist you?
-  - text: What I can do for you today?
-  - text: Hi, there !!
-  - text: Nice to meet you.
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_goodbye:
-  - text: "Bye"
-  - text: "Goodbye"
-  - text: "Bye, it was a pleasure assisting you"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
-  utter_ask_temperature:
-  - text: "Sure, I can help you with the current temperature. Could you please specify the location or date?"
-
-  utter_ask_precipitation:
-  - text: "Certainly! Are you looking for the precipitation forecast? Please provide the location or date."
-
-  utter_ask_wind:
-  - text: "Got it! To help you with the wind conditions, could you please provide the location or date?"
-
-  utter_ask_humidity:
-  - text: "Sure thing! For humidity information, please specify the location or date you're interested in."
-
-  utter_ask_sunrise_sunset:
-  - text: "Sure, I can provide details about the sunrise and sunset. Could you please specify the location or date?"
-
-  utter_ask_location:
-  - text: "Sure, I can provide the weather information for a specific location. Please specify the location you're interested in."
-
-  utter_ask_days:
-  - text: "Got it! How many days into the future would you like to know the weather forecast?"
-
-  utter_ask_weather_type:
-  - text: "What type of weather information are you interested in? You can ask about temperature, precipitation, wind, humidity, or sunrise and sunset."
+  - utter_greet
+  - utter_location
+  - utter_days
+  - utter_temperature
+  - utter_precipitation
+  - utter_wind
+  - utter_humidity
+  - utter_sunrise_sunset
+  - utter_goodbye
+  - utter_dashboard
   
 session_config:
   session_expiration_time: 60

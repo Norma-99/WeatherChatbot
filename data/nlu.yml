@@ -43,68 +43,57 @@ nlu:
     - no way
     - not really
 
-- intent: ask_weather
+- intent: inform_location
   examples: |
-    - what's the weather
-    - what is the temperature today
-    - what is the temperature
-    - i want to know the temperature
-    - i want to know the weather today
-    - tell me the weather forecast
-    - hows the weather today
+    - San Francisco
+    - I want weather in Paris
+    - Amsterdam
+    - I want to know the weather in Barcelona
+    - What's the weather in Delhi?
 
-- intent: inform
+- intent: inform_days
   examples: |
-    - {"entity": "weather_type", "value": "temperature"}
-    - {"entity": "weather_type", "value": "precipitation"}
-    - {"entity": "weather_type", "value": "wind"}
-    - {"entity": "weather_type", "value": "humidity"}
-    - {"entity": "weather_type", "value": "sunrise_sunset"}
-    
-- intent: ask_location
-  examples: |
-    - Show me what's the weather in [Paris](location)
-    - The weather condition in [Italy](location)
-    - How's the weather in [Chennai](location)
-    - How's [Berlin](location) today
-    - What is the weather in [Delhi](location)
-    - Temperature in [Amsterdam](location)
-    - tell me the temperature at [Ohio](location)
-    - What is the weather like in [location]?
-    - Tell me about the weather conditions in [location].
+    - 2 days
+    - For 4 days
+    - The next 14 days
+    - Today
+    - One week
+    - Two weeks
+    - Weather for the next 6 days
 
-- intent: ask_temperature
+- intent: inform_temperature
   examples: |
-    - What is the current temperature?
-    - Tell me the temperature right now.
-    - How hot is it outside?
+    - Yes, I want temperature
+    - Tell me the temperature
+    - What's the temperature?
 
-- intent: ask_precipitation
+- intent: inform_precipitation
   examples: |
-    - Is it going to rain today?
-    - What's the precipitation forecast?
-    - Will it snow?
+    - Yes, I want precipitation
+    - Tell me about precipitation
+    - What's the precipitation like?
 
-- intent: ask_wind
+- intent: inform_wind
   examples: |
-    - What is the wind speed?
-    - Tell me about the wind conditions.
-    - Is it windy today?
+    - Yes, I want wind information
+    - Tell me about the wind
+    - What's the wind speed?
 
-- intent: ask_humidity
+- intent: inform_humidity
   examples: |
-    - What is the humidity level?
-    - How humid is it outside?
-    - Tell me about the humidity.
+    - Yes, I want humidity information
+    - Tell me about the humidity
+    - What's the humidity level?
 
-- intent: ask_sunrise_sunset
+- intent: inform_sunrise_sunset
   examples: |
-    - When is the sunrise?
-    - What time is sunset today?
-    - Tell me about the sunrise and sunset.
+    - Yes, I want sunrise and sunset information
+    - Tell me about the sunrise and sunset
+    - When is the sunrise and sunset?
 
-- intent: ask_days
+- intent: goodbye
   examples: |
-    - What is the weather forecast for the next [days] days?
-    - Tell me about the weather in the next [days] days.
-    - Weather forecast for the next [days] days.
+    - No, thank you
+    - I'm done
+    - Goodbye
+    - That's enough

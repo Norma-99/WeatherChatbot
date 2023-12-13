@@ -8,14 +8,15 @@ import asyncio
 
 
 class ChatbotController:
-    def __init__(self, model_path="./models/20231207-111123-ragged-meander.tar.gz"):
+    def __init__(self, model_path="./models/20231213-084652-concentric-container.tar.gz"):
         """initialize the chatbot framework"""
         self.agent = Agent.load(model_path)
+        print(f"Model: {self.agent}")
         self.responses = dict()
         st.title("Weather Chatbot")
 
         with st.chat_message(name="assistant"):
-            st.markdown("Hey I am your AI based assistant, what can I help you with?")
+            st.markdown("Hey I am your AI based assistant, would you like to know the weather?")
 
         # Setting up the session state with a loop that shows the conversation
         # In the chat message I can add my own avatar if I want
@@ -36,9 +37,13 @@ class ChatbotController:
 
 
     async def get_chatbot_response(self, prompt:str) -> None:
+        print(f"User's input: {prompt}")
         response = await self.agent.handle_text(prompt)
-        bot_response = response # response[0]['text']
-
+        print(f"Chatbot's response: {response}")
+        bot_response = "There was no response from the model"
+        if response: 
+            bot_response = response[0]['text']
+        
         with st.chat_message("assistant"):
             st.session_state.messages.append({"role": "assistant", "content": bot_response})
             self.update_responses(user_input=prompt, response=bot_response)

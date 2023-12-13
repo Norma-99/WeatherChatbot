@@ -8,3 +8,5 @@ rasa init --no-prompt so it created all the necessary files for training (maybe 
 
 https://medium.com/analytics-vidhya/building-a-simple-weather-chatbot-using-rasa-54eaf97daa82
 
+Rasa video: 
+- https://www.youtube.com/watch?v=suZvPjnSHA0
