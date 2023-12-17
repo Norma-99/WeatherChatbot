@@ -14,6 +14,12 @@ nlu:
     - good evening
     - good afternoon
 
+- intent: weather
+  examples: |
+    - yes
+    - sure
+    - tell me the weather
+
 - intent: goodbye
   examples: |
     - good night
@@ -24,15 +30,6 @@ nlu:
     - bye bye
     - see you later
 
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-
 - intent: deny
   examples: |
     - no
@@ -42,58 +39,5 @@ nlu:
     - don't like that
     - no way
     - not really
-
-- intent: inform_location
-  examples: |
-    - San Francisco
-    - I want weather in Paris
-    - Amsterdam
-    - I want to know the weather in Barcelona
-    - What's the weather in Delhi?
-
-- intent: inform_days
-  examples: |
-    - 2 days
-    - For 4 days
-    - The next 14 days
-    - Today
-    - One week
-    - Two weeks
-    - Weather for the next 6 days
-
-- intent: inform_temperature
-  examples: |
-    - Yes, I want temperature
-    - Tell me the temperature
-    - What's the temperature?
-
-- intent: inform_precipitation
-  examples: |
-    - Yes, I want precipitation
-    - Tell me about precipitation
-    - What's the precipitation like?
-
-- intent: inform_wind
-  examples: |
-    - Yes, I want wind information
-    - Tell me about the wind
-    - What's the wind speed?
-
-- intent: inform_humidity
-  examples: |
-    - Yes, I want humidity information
-    - Tell me about the humidity
-    - What's the humidity level?
-
-- intent: inform_sunrise_sunset
-  examples: |
-    - Yes, I want sunrise and sunset information
-    - Tell me about the sunrise and sunset
-    - When is the sunrise and sunset?
-
-- intent: goodbye
-  examples: |
-    - No, thank you
-    - I'm done
-    - Goodbye
-    - That's enough
+    - I don't want the weather
+    - not interested in the weather

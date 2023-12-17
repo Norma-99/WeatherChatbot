@@ -2,94 +2,38 @@ version: "3.1"
 
 intents:
   - greet
-  - affirm
-  - deny
-  - inform_location
-  - inform_days
-  - inform_temperature
-  - inform_precipitation
-  - inform_wind
-  - inform_humidity
-  - inform_sunrise_sunset
+  - weather
   - goodbye
-
-entities:
-  - location
-  - days
-  - temperature
-  - precipitation
-  - wind
-  - humidity
-  - sunrise_sunset
+  - deny
 
 responses:
   utter_greet:
-    - text: "Hello, I will be your chatbot today." 
-  utter_weather:  
+    - text: "Hello!"
+
+  utter_ask_weather:
     - text: "Would you like to know the weather?"
+
+  utter_weather:
+    - text: "The weather is sunny and warm."
+
   utter_only_weather_goodbye:
     - text: "I can only provide weather information. Goodbye!"
-  utter_location:
-    - text: "Where would you like to know the weather?"
-  utter_days:
-    - text: "For how many days in the future would you like to know the weather?"
-  utter_temperature:
-    - text: "Would you like to know the temperatures?"
-  utter_precipitation:
-    - text: "Would you like to know the precipitation?"
-  utter_wind:
-    - text: "Would you like to know the wind?"
-  utter_humidity:
-    - text: "Would you like to know the humidity?"
-  utter_sunrise_sunset:
-    - text: "Would you like to know at what time is the sunrise and sunset?"
-  utter_goodbye:
-    - text: "Thank you. Please wait while I get your weather dashboard."
-  utter_dashboard:
-    - text: "Print weather dashboard. It was a pleasure assisting you."
 
-slots:
-  location:
-    type: text
-    mappings: 
-    - type: from_text
-  days:
-    type: text
-    mappings: 
-    - type: from_text
-  temperature:
-    type: text
-    mappings: 
-    - type: from_text
-  precipitation:
-    type: text
-    mappings: 
-    - type: from_text
-  wind:
-    type: text
-    mappings: 
-    - type: from_text
-  humidity:
-    type: text
-    mappings: 
-    - type: from_text
-  sunrise_sunset:
-    type: text
-    mappings: 
-    - type: from_text
+  utter_goodbye:
+    - text: "Thank you for chatting. Goodbye!"
+  
+  utter_denied_weather:
+    - text: "Sure! If you ever change your mind and want to know the weather, feel free to ask. Goodbye!"
 
 actions:
   - utter_greet
-  - utter_location
-  - utter_days
-  - utter_temperature
-  - utter_precipitation
-  - utter_wind
-  - utter_humidity
-  - utter_sunrise_sunset
+  - utter_ask_weather
+  - utter_weather
+  - utter_only_weather_goodbye
   - utter_goodbye
-  - utter_dashboard
-  
+
+slots: {}
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

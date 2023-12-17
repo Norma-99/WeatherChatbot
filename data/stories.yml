@@ -1,51 +1,21 @@
 version: "3.1"
 
-
 stories:
 - story: happy path
   steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_weather
-  - intent: inform_location
-  - action: utter_location
-  - slot_was_set:
-    - location: "New York"  # Replace with the extracted location
-  - intent: inform_days
-  - action: utter_days
-  - slot_was_set:
-    - days: "7"  # Replace with the extracted number of days
-  - intent: inform_temperature
-  - action: utter_temperature
-  - slot_was_set:
-    - temperature: "yes"  # Replace with the extracted temperature preference
-  - intent: inform_precipitation
-  - action: utter_precipitation
-  - slot_was_set:
-    - precipitation: "yes"
-  - intent: inform_wind
-  - action: utter_wind
-  - slot_was_set:
-    - wind: "yes"  # Replace with the extracted temperature preference
-  - intent: inform_humidity
-  - action: utter_humidity
-  - slot_was_set:
-    - humidity: "yes"  # Replace with the extracted temperature preference
-  - intent: inform_sunrise_sunset
-  - action: utter_sunrise_sunset
-  - slot_was_set:
-    - sunrise_sunset: "yes"  # Replace with the extracted temperature preference
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: utter_dashboard
+    - intent: greet
+    - action: utter_greet
+    - action: utter_ask_weather
+    - intent: weather
+    - action: utter_weather
+    - intent: goodbye
+    - action: utter_goodbye
 
-- story: unhappy path
+- story: only weather path
   steps:
-  - intent: deny
-  - intent: greet
-  - action: utter_greet
-  - action: utter_weather
-  - intent: goodbye
-  - action: utter_only_weather_goodbye
-
-
+    - intent: greet
+    - action: utter_greet
+    - action: utter_ask_weather
+    - intent: deny
+    - action: utter_only_weather_goodbye
+    - action: utter_denied_weather
