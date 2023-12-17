@@ -8,7 +8,7 @@ import asyncio
 
 
 class ChatbotController:
-    def __init__(self, model_path="./models/20231213-084815-vicious-ray.tar.gz"):
+    def __init__(self, model_path="./models/20231217-110727-terminal-century.tar.gz"):
         """initialize the chatbot framework"""
         self.agent = Agent.load(model_path)
         print(f"Model: {self.agent}")
