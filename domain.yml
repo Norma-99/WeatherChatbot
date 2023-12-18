@@ -1,0 +1,134 @@
+version: "3.1"
+
+intents:
+  - greet
+  - affirm
+  - goodbye
+  - deny
+  - temperature
+  - precipitation
+  - wind
+  - humidity
+  - sunrise_sunset
+
+responses:
+  utter_greet:
+    - text: "Hello!"
+
+  utter_ask_weather:
+    - text: "Would you like to know the weather?"
+
+  utter_weather:
+    - text: "The weather is sunny and warm."
+
+  utter_only_weather_goodbye:
+    - text: "I can only provide weather information. Goodbye!"
+
+  utter_goodbye:
+    - text: "Thank you for chatting. Goodbye!"
+  
+  utter_denied_weather:
+    - text: "Sure! If you ever change your mind and want to know the weather, feel free to ask. Goodbye!"
+
+  utter_ask_temperature:
+    - text: "Would you like to know the temperatures?"
+  
+  utter_temperature:
+    - text: "The temperature is 20 degrees celsius"
+
+  utter_ask_precipitation:
+    - text: "Would you like to know the precipitation?"
+  
+  utter_precipitation:
+    - text: "There will be no precipitation today"
+
+  utter_ask_wind:
+    - text: "Would you like to know the wind?"
+  
+  utter_wind:
+    - text: "The wind is 2mph north-west"
+
+  utter_ask_humidity:
+    - text: "Would you like to know the humidity?"
+  
+  utter_humidity: 
+    - text: "The humidity today is at 93%"
+
+  utter_ask_sunrise_sunset:
+    - text: "Would you like to know at what time is the sunrise and sunset?"
+  
+  utter_sunrise_sunset:
+    - text: "Sunrise today is at 6:39 am and sunset is at 20:47"
+
+
+actions:
+  - utter_greet
+  - utter_ask_weather
+  - utter_weather
+  - utter_only_weather_goodbye
+  - utter_goodbye
+  - utter_denied_weather
+  - utter_ask_temperature
+  - utter_ask_precipitation
+  - utter_ask_wind
+  - utter_ask_humidity
+  - utter_ask_sunrise_sunset
+
+
+slots:
+  temperature_response:
+    type: bool
+    initial_value: false
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: deny
+        value: false
+  # precipitation_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # wind_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # humidity_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # sunrise_sunset_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
