@@ -79,6 +79,7 @@ slots:
   temperature_response:
     type: bool
     initial_value: false
+    influence_conversation: false
     mappings:
       - type: from_intent
         intent: affirm
@@ -86,46 +87,46 @@ slots:
       - type: from_intent
         intent: deny
         value: false
-  precipitation_response:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: from_intent
-        intent: affirm
-        value: true
-      - type: from_intent
-        intent: deny
-        value: false
-  wind_response:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: from_intent
-        intent: affirm
-        value: true
-      - type: from_intent
-        intent: deny
-        value: false
-  humidity_response:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: from_intent
-        intent: affirm
-        value: true
-      - type: from_intent
-        intent: deny
-        value: false
-  sunrise_sunset_response:
-    type: bool
-    initial_value: false
-    mappings:
-      - type: from_intent
-        intent: affirm
-        value: true
-      - type: from_intent
-        intent: deny
-        value: false
+  # precipitation_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # wind_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # humidity_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # sunrise_sunset_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
 
 
 session_config:

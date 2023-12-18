@@ -9,24 +9,25 @@ stories:
     - action: utter_weather
     - action: utter_ask_temperature
     - intent: affirm
+    - action: utter_temperature
     - slot_was_set:
         - temperature_response: true
     - action: utter_ask_precipitation
     - intent: affirm
-    - slot_was_set:
-        - precipitation_response: true
+    # - slot_was_set:
+    #     - precipitation_response: true
     - action: utter_ask_wind
     - intent: affirm
-    - slot_was_set:
-        - wind_response: true
+    # - slot_was_set:
+    #     - wind_response: true
     - action: utter_ask_humidity
     - intent: affirm
-    - slot_was_set:
-        - humidity_response: true
+    # - slot_was_set:
+    #     - humidity_response: true
     - action: utter_ask_sunrise_sunset
     - intent: affirm
-    - slot_was_set:
-        - sunrise_sunset_response: true
+    # - slot_was_set:
+    #     - sunrise_sunset_response: true
     - intent: goodbye
     - action: utter_goodbye
 
