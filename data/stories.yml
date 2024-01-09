@@ -9,7 +9,6 @@ stories:
     - action: utter_weather
     - action: utter_ask_temperature
     - intent: affirm
-    - action: utter_temperature
     - slot_was_set:
         - temperature_response: true
     - action: utter_ask_precipitation

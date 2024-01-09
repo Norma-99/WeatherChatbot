@@ -3,10 +3,17 @@ This is a simple weather chatbot created using Rasa and Streamlit libraries from
 
 
 For the training I typed: 
-rasa init --no-prompt so it created all the necessary files for training (maybe later I will take out some of them)
+```rasa init --no-promp``` so it created all the necessary files for training (maybe later I will take out some of them)
 
 
 https://medium.com/analytics-vidhya/building-a-simple-weather-chatbot-using-rasa-54eaf97daa82
 
 Rasa video: 
 - https://www.youtube.com/watch?v=suZvPjnSHA0
+
+## Commands: 
+```rasa shell --debug```
+
+```streamlit run __main__.py```
+
+```rasa train```
