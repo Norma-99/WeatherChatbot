@@ -24,6 +24,7 @@ class WeatherInformation:
                 self.weather_information[key] = None
         self.weather_information["location"] = self.user_resp["location"]
         self.weather_information["days"] = self.user_resp["days"]
+        self.weather_information["days_list"] = self.get_days_list()
 
     def get_temperatures(self) -> list:
         """
@@ -71,6 +72,24 @@ class WeatherInformation:
         random_minute = random.randint(0, 59)
         return datetime(1, 1, 1, random_hour, random_minute) + timedelta(days=random.randint(0, 365))
 
+
+    def get_days_list(self) -> list:
+        """
+        Generate a list containing the Weekdays requested. 
+        i.e days = 2 and today is 22nd of Jan of 2024 the list will be: [01/22/24, 01/23/24]
+        """
+        days = self.user_resp["days"]
+
+        if (days <= 0) or (not isinstance(days, int)):
+            raise Exception(f"The number of days should be a positive integer")
+
+        today = datetime.now()
+        days_list = []
+
+        for i in range(days):
+            next_day = today + timedelta(days=i)
+            days_list.append(next_day.strftime("%m/%d/%y"))
+        return days_list
 
 
 
