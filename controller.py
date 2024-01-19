@@ -6,6 +6,10 @@ import streamlit as st
 from rasa.core.agent import Agent
 import asyncio
 
+from weather_information import WeatherInformation
+from viz_dash import VisualizationDashboard
+from chatbotUI import ChatbotUI
+
 
 class ChatbotController:
     def __init__(self, model_path="./models/20231218-082112-open-edging.tar.gz"):
@@ -71,3 +75,15 @@ class ChatbotController:
         if prompt := st.chat_input("Type your query"):
             self.get_user_input(prompt=prompt)
             asyncio.run(self.get_chatbot_response(prompt=prompt))
+        
+        # At the end of the answers print the visualization dashboard
+        wi = WeatherInformation(self.responses)
+        wi.get_weather_info()
+
+        vd = VisualizationDashboard(wi)
+        plots = vd.run()
+
+        chat_UI = ChatbotUI(plots, wi["location"], wi['days'])
+        chat_UI.display_plots()
+
+

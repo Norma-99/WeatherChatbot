@@ -25,6 +25,8 @@ class WeatherInformation:
         self.weather_information["location"] = self.user_resp["location"]
         self.weather_information["days"] = self.user_resp["days"]
         self.weather_information["days_list"] = self.get_days_list()
+        return self.weather_information
+    
 
     def get_temperatures(self) -> list:
         """
@@ -103,7 +105,7 @@ example_user_resp = {
     "humidity": True,
     "sunrise_sunset": True
 }
-weather_info = WeatherInformation(example_user_resp)
-weather_info.get_weather_info()
+wi = WeatherInformation(example_user_resp)
+weather_info = wi.get_weather_info()
 
-print(weather_info.weather_information)
+print(weather_info)

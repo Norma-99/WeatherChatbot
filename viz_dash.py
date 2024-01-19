@@ -18,43 +18,44 @@ class VisualizationDashboard:
         # Set Date as the index
         self.df['Date'] = pd.to_datetime(self.df['Date'], format='%m/%d/%y')
         self.df.set_index('Date', inplace=True)
+        self.plots = dict()
 
 
     def create_plot(self, df_index: str, metric: str):
-        plt.figure(figsize=(10, 6))
-        plt.plot(self.df.index, self.df[df_index], marker='o', label=df_index)
-        plt.title(f'{df_index} Over Time')
-        plt.xlabel('Date')
-        plt.ylabel(f'{df_index} ({metric})')
-        plt.legend()
-        plt.show()
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.plot(self.df.index, self.df[df_index], marker='o', label=df_index)
+        ax.set_title(f'{df_index} Over Time')
+        ax.set_xlabel('Date')
+        ax.set_ylabel(f'{df_index} ({metric})')
+        ax.legend()
+        return fig
 
 
     def get_temperature_plot(self):
         # Temperature plot
-        self.create_plot(df_index='Temperature', metric='°C')
+        self.plots['temperature'] = self.create_plot(df_index='Temperature', metric='°C')
 
 
     def get_precipitation_plot(self):
         # Precipitation plot
         # This is a bar plot
-        plt.figure(figsize=(10, 6))
-        plt.bar(self.df.index, self.df['Precipitation'], label='Precipitation')
-        plt.title('Precipitation Over Time')
-        plt.xlabel('Date')
-        plt.ylabel('Precipitation (mm)')
-        plt.legend()
-        plt.show()
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.bar(self.df.index, self.df['Precipitation'], label='Precipitation')
+        ax.set_title('Precipitation Over Time')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Precipitation (mm)')
+        ax.legend()
+        self.plots['precipitation'] = fig
 
 
     def get_wind_plot(self):
         # Wind plot
-        self.create_plot(df_index='Wind', metric='m/s')
+        self.plots['wind'] = self.create_plot(df_index='Wind', metric='m/s')
 
 
     def get_humidity_plot(self):
         # Humidity plot
-        self.create_plot(df_index='Humidity', metric='%')
+        self.plots['humidity'] = self.create_plot(df_index='Humidity', metric='%')
 
 
     def get_sunrise_sunset_plot(self):
@@ -70,33 +71,35 @@ class VisualizationDashboard:
         sunset_hours = [time.hour + time.minute / 60 for time in sunset_times]
 
         # Plotting the data
-        plt.plot(self.viz_info['days_list'], sunrise_hours, label='Sunrise', marker='o')
-        plt.plot(self.viz_info['days_list'], sunset_hours, label='Sunset', marker='o')
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.plot(self.viz_info['days_list'], sunrise_hours, label='Sunrise', marker='o')
+        ax.plot(self.viz_info['days_list'], sunset_hours, label='Sunset', marker='o')
 
         # Formatting the x-axis ticks for better readability
-        plt.xticks(rotation=45)
+        ax.set_xticks(self.viz_info['days_list'])
+        ax.tick_params(axis='x', rotation=45)
 
         # Formatting the y-axis ticks with time in the format '8:00AM', '10:00AM', etc.
         y_ticks = range(0, 24, 2)
-        plt.yticks(y_ticks, [datetime.strptime(str(int(hour)) + ':00', '%H:%M').strftime('%I:%M%p') for hour in y_ticks])
-
+        ax.set_yticks(y_ticks)
+        ax.set_yticklabels([datetime.strptime(str(int(hour)) + ':00', '%H:%M').strftime('%I:%M%p') for hour in y_ticks])
 
         # Adding labels and title
-        plt.xlabel('Date')
-        plt.ylabel('Time')
-        plt.title('Sunrise and Sunset Data')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Time')
+        ax.set_title('Sunrise and Sunset Data')
 
         # Adding a legend
-        plt.legend()
+        ax.legend()
 
         # Displaying the exact time on each data point
-        for i, date in enumerate(sample_data['days_list']):
-            plt.text(date, sunrise_hours[i], sunrise_times[i].strftime('%I:%M%p'), ha='center', va='bottom')
-            plt.text(date, sunset_hours[i], sunset_times[i].strftime('%I:%M%p'), ha='center', va='top')
+        for i, date in enumerate(self.viz_info['days_list']):
+            ax.text(date, sunrise_hours[i], sunrise_times[i].strftime('%I:%M%p'), ha='center', va='bottom')
+            ax.text(date, sunset_hours[i], sunset_times[i].strftime('%I:%M%p'), ha='center', va='top')
 
         # Displaying the plot
-        plt.tight_layout()
-        plt.show()
+        fig.tight_layout()
+        self.plots['sunrise_sunset'] = fig
 
 
     def run(self):
@@ -105,6 +108,9 @@ class VisualizationDashboard:
         self.get_wind_plot()
         self.get_humidity_plot()
         self.get_sunrise_sunset_plot()
+
+        # plt.show()
+        return self.plots
 
 
 
@@ -120,5 +126,4 @@ sample_data = {
 }
 
 vd = VisualizationDashboard(sample_data)
-vd.run()
-
+plots = vd.run()
