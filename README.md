@@ -11,6 +11,12 @@ https://medium.com/analytics-vidhya/building-a-simple-weather-chatbot-using-rasa
 Rasa video: 
 - https://www.youtube.com/watch?v=suZvPjnSHA0
 
+## Installations
+
+```pip3 install spacy```
+```python3 -m spacy download en```
+```python -m spacy download en_core_web_sm```
+
 ## Commands: 
 ```rasa shell --debug```
 

@@ -5,10 +5,11 @@
 import streamlit as st
 from rasa.core.agent import Agent
 import asyncio
+import spacy
 
-from weather_information import WeatherInformation
-from viz_dash import VisualizationDashboard
-from chatbotUI import ChatbotUI
+# from weather_information import WeatherInformation
+# from viz_dash import VisualizationDashboard
+# from chatbotUI import ChatbotUI
 
 
 class ChatbotController:
@@ -77,13 +78,36 @@ class ChatbotController:
             asyncio.run(self.get_chatbot_response(prompt=prompt))
         
         # At the end of the answers print the visualization dashboard
-        wi = WeatherInformation(self.responses)
-        wi.get_weather_info()
+        # wi = WeatherInformation(self.responses)
+        # wi.get_weather_info()
 
-        vd = VisualizationDashboard(wi)
-        plots = vd.run()
+        # vd = VisualizationDashboard(wi)
+        # plots = vd.run()
 
-        chat_UI = ChatbotUI(plots, wi["location"], wi['days'])
-        chat_UI.display_plots()
+        # chat_UI = ChatbotUI(plots, wi["location"], wi['days'])
+        # chat_UI.display_plots()
 
 
+###### GOAL #######
+# example_user_resp = {
+#     "location": "london",
+#     "days": 4,
+#     "temperature": True,
+#     "precipitation": True,
+#     "wind": True,
+#     "humidity": True,
+#     "sunrise_sunset": True
+# }
+
+# import streamlit as st
+# import spacy
+
+# nlp = spacy.load("en_core_web_sm")
+
+# st.title("Simple NLP with Streamlit")
+
+# user_input = st.text_input("Enter a sentence:", "")
+# if st.button("Analyze"):
+#     doc = nlp(user_input)
+#     st.text("Tokens:", [token.text for token in doc])
+spacy.load('en_core_web_sm')

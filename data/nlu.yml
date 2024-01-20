@@ -50,32 +50,32 @@ nlu:
     - not interested in the weather
 
 
-- intent: temperature
-  examples: |
-    - Yes, I want temperature
-    - Tell me the temperature
-    - What's the temperature?
+# - intent: temperature
+#   examples: |
+#     - Yes, I want temperature
+#     - Tell me the temperature
+#     - What's the temperature?
 
-- intent: precipitation
-  examples: |
-    - Yes, I want precipitation
-    - Tell me about precipitation
-    - What's the precipitation like?
+# - intent: precipitation
+#   examples: |
+#     - Yes, I want precipitation
+#     - Tell me about precipitation
+#     - What's the precipitation like?
 
-- intent: wind
-  examples: |
-    - Yes, I want wind information
-    - Tell me about the wind
-    - What's the wind speed?
+# - intent: wind
+#   examples: |
+#     - Yes, I want wind information
+#     - Tell me about the wind
+#     - What's the wind speed?
 
-- intent: humidity
-  examples: |
-    - Yes, I want humidity information
-    - Tell me about the humidity
-    - What's the humidity level?
+# - intent: humidity
+#   examples: |
+#     - Yes, I want humidity information
+#     - Tell me about the humidity
+#     - What's the humidity level?
 
-- intent: sunrise_sunset
-  examples: |
-    - Yes, I want sunrise and sunset information
-    - Tell me about the sunrise and sunset
-    - When is the sunrise and sunset?
+# - intent: sunrise_sunset
+#   examples: |
+#     - Yes, I want sunrise and sunset information
+#     - Tell me about the sunrise and sunset
+#     - When is the sunrise and sunset?

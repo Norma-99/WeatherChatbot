@@ -4,9 +4,10 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-# from typing import Any, Text, Dict, List
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
+from typing import Any, Text, Dict, List
+from rasa_sdk import Action, Tracker
+from rasa_sdk.events import SlotSet
+from rasa_sdk.executor import CollectingDispatcher
 
 # class ActionGreet(Action):
 #     def name(self) -> Text:
@@ -24,6 +25,22 @@
 #         # Replace with your logic to fetch temperature data
 #         dispatcher.utter_message("Here is the temperature information.")
 #         return []
+
+
+
+class ActionSetResponse(Action):
+    def name(self) -> Text:
+        return "action_set_response"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # Set the 'response_type' variable based on the user's response
+        affirm_intent = tracker.latest_message['intent'].get('name') == 'affirm'
+        response_type = tracker.get_slot('response_type')  # Change 'response_type' to the appropriate slot name
+        tracker.events.append(SlotSet(response_type, affirm_intent))
+
+        return []
+
+
 
 # class ActionGetPrecipitation(Action):
 #     def name(self) -> Text:
