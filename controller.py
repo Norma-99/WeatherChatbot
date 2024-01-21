@@ -89,15 +89,15 @@ class ChatbotController:
 
 
 ###### GOAL #######
-# example_user_resp = {
-#     "location": "london",
-#     "days": 4,
-#     "temperature": True,
-#     "precipitation": True,
-#     "wind": True,
-#     "humidity": True,
-#     "sunrise_sunset": True
-# }
+example_user_resp = {
+    "location": "london",
+    "days": 4,
+    "temperature": True,
+    "precipitation": True,
+    "wind": True,
+    "humidity": True,
+    "sunrise_sunset": True
+}
 
 # import streamlit as st
 # import spacy
@@ -110,4 +110,3 @@ class ChatbotController:
 # if st.button("Analyze"):
 #     doc = nlp(user_input)
 #     st.text("Tokens:", [token.text for token in doc])
-spacy.load('en_core_web_sm')

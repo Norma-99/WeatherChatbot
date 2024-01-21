@@ -6,39 +6,38 @@ stories:
     - intent: greet
     - action: utter_ask_weather
     - intent: affirm
-    # - action: utter_weather
     - action: utter_ask_temperature
-    - intent: affirm
-    - action: action_set_response
-    # - slot_was_set:
-    #     - temperature_response: true
-    # - action: utter_temperature
+    - checkpoint: check_response
     - action: utter_ask_precipitation
-    - intent: affirm
-    - action: action_set_response
-    # - slot_was_set:
-    #     - precipitation_response: true
-    # - action: utter_precipitation
+    - checkpoint: check_response
     - action: utter_ask_wind
-    - intent: affirm
-    - action: action_set_response
-    # - slot_was_set:
-    #     - wind_response: true
-    # - action: utter_wind
+    - checkpoint: check_response
     - action: utter_ask_humidity
-    - intent: affirm
-    - action: action_set_response
-    # - slot_was_set:
-    #     - humidity_response: true
-    # - action: utter_humidity
+    - checkpoint: check_response
     - action: utter_ask_sunrise_sunset
+    - checkpoint: check_response
+
+- story: handle user affirm
+  steps: 
+    - checkpoint: check_response
     - intent: affirm
-    - action: action_set_response
-    # - slot_was_set:
-    #     - sunrise_sunset_response: true
-    # - action: utter_sunrise_sunset
+    - action: utter_affirm
+    - checkpoint: check_flow_finished
+
+- story: handle user deny
+  steps: 
+    - checkpoint: check_response
+    - intent: deny
+    - action: utter_deny
+    - checkpoint: check_flow_finished
+
+- story: finish flow
+  steps: 
+    - checkpoint: check_flow_finished
     - intent: goodbye
     - action: utter_goodbye
+
+
 
 - story: unhappy path
   steps:
@@ -47,3 +46,79 @@ stories:
     - intent: deny
     - action: utter_only_weather_goodbye
     - action: utter_denied_weather
+
+
+
+    # - or: 
+    #   - slot_was_set:
+    #     - temperature_response: true
+    #   - slot_was_set:
+    #     - temperature_response: false
+    # - action: 
+    # - action: utter_ask_precipitation
+    # - intent: affirm
+    # - slot_was_set:
+    #     - precipitation_response: true
+    # - action: utter_precipitation
+    # - action: utter_ask_wind
+    # - intent: affirm
+    # - action: action_set_response
+    # # - slot_was_set:
+    # #     - wind_response: true
+    # # - action: utter_wind
+    # - action: utter_ask_humidity
+    # - intent: affirm
+    # - action: action_set_response
+    # # - slot_was_set:
+    # #     - humidity_response: true
+    # # - action: utter_humidity
+    # - action: utter_ask_sunrise_sunset
+    # - intent: affirm
+    # - action: action_set_response
+    # - slot_was_set:
+    #     - sunrise_sunset_response: true
+    # - action: utter_sunrise_sunset
+    # - intent: goodbye
+    # - action: utter_goodbye
+
+    
+# stories:
+# - story: happy path
+#   steps:
+#     - intent: greet
+#     - action: utter_ask_weather
+#     - intent: affirm
+#     - action: utter_ask_temperature
+#     - intent: affirm
+#     # - action: action_set_response
+#     # - action: get_responses_action
+#     # - slot_was_set:
+#     #     - temperature_response: true
+#     # - action: utter_temperature
+#     - action: utter_ask_precipitation
+#     - intent: affirm
+#     # - action: action_set_response
+#     - action: get_responses_action
+#     # - slot_was_set:
+#     #     - precipitation_response: true
+#     # - action: utter_precipitation
+#     # - action: utter_ask_wind
+#     # - intent: affirm
+#     # - action: action_set_response
+#     # # - slot_was_set:
+#     # #     - wind_response: true
+#     # # - action: utter_wind
+#     # - action: utter_ask_humidity
+#     # - intent: affirm
+#     # - action: action_set_response
+#     # # - slot_was_set:
+#     # #     - humidity_response: true
+#     # # - action: utter_humidity
+#     # - action: utter_ask_sunrise_sunset
+#     # - intent: affirm
+#     # - action: action_set_response
+#     # - slot_was_set:
+#     #     - sunrise_sunset_response: true
+#     # - action: utter_sunrise_sunset
+#     - intent: goodbye
+#     - action: utter_goodbye

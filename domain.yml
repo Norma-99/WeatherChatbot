@@ -22,7 +22,7 @@ responses:
   #   - text: "The weather is sunny and warm."
 
   utter_only_weather_goodbye:
-    - text: "I can only provide weather information. Goodbye!"
+    - text: "I can only provide weather information."
 
   utter_goodbye:
     - text: "Thank you for chatting. Goodbye!"
@@ -57,9 +57,26 @@ responses:
   utter_ask_sunrise_sunset:
     - text: "Would you like to know at what time is the sunrise and sunset?"
   
-  # utter_sunrise_sunset:
-  #   - text: "Sunrise today is at 6:39 am and sunset is at 20:47"
+  utter_affirm: 
+    - text: "You answered YES!"
+  
+  utter_deny: 
+    - text: "You answered NO!"
 
+  # utter_sunrise_sunset:
+  #   - text: "Sunrise today is at 6:39 am and sunset is at 20:47" 
+
+  # utter_conditional_response: 
+  #   - condition: 
+  #     - type: slot
+  #       name: response
+  #       value: true 
+  #     text: "You answered YES!"
+  #   - condition:
+  #     - type: slot
+  #       name: response
+  #       value: false 
+  #     text: "You answered NO!"
 
 actions:
   # - utter_greet
@@ -73,72 +90,84 @@ actions:
   - utter_ask_wind
   - utter_ask_humidity
   - utter_ask_sunrise_sunset
-  - action_set_response
+  - utter_conditional_response
+  # - action_set_response
+  # - get_responses_action
+
+
+# forms:
+#   conditional_response_form:
+#     required_slots:
+#       response:
+#         - intent: affirm
+#           not_intent: deny
+#           type: from_intent
+#           value: true
+#         - intent: deny
+#           not_intent: affirm
+#           type: from_intent
+#           value: false
 
 
 # slots:
-#   weather_response:
-#     type: bool
-#     initial_value: false
-#     influence_conversation: false
-#     mappings:
-#       - type: from_intent
-#         intent: affirm
-#         value: true
-#       - type: from_intent
-#         intent: deny
-#         value: false
-#   temperature_response:
-#     type: bool
-#     initial_value: false
-#     influence_conversation: false
-#     mappings:
-#       - type: from_intent
-#         intent: affirm
-#         value: true
-#       - type: from_intent
-#         intent: deny
-#         value: false
-#   precipitation_response:
-#     type: bool
-#     initial_value: false
-#     mappings:
-#       - type: from_intent
-#         intent: affirm
-#         value: true
-#       - type: from_intent
-#         intent: deny
-#         value: false
-#   wind_response:
-#     type: bool
-#     initial_value: false
-#     mappings:
-#       - type: from_intent
-#         intent: affirm
-#         value: true
-#       - type: from_intent
-#         intent: deny
-#         value: false
-#   humidity_response:
-#     type: bool
-#     initial_value: false
-#     mappings:
-#       - type: from_intent
-#         intent: affirm
-#         value: true
-#       - type: from_intent
-#         intent: deny
-#         value: false
-#   sunrise_sunset_response:
-#     type: bool
-#     initial_value: false
-#     mappings:
-#       - type: from_intent
-#         intent: affirm
-#         value: true
-#       - type: from_intent
-#         intent: deny
-#         value: false
+  # response:
+  #   type: bool
+  #   initial_value: false
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: custom
+  #       action: action_store_user_response
+  # temperature_response:
+  #   type: bool
+  #   initial_value: false
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # precipitation_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # wind_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # humidity_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
+  # sunrise_sunset_response:
+  #   type: bool
+  #   initial_value: false
+  #   mappings:
+  #     - type: from_intent
+  #       intent: affirm
+  #       value: true
+  #     - type: from_intent
+  #       intent: deny
+  #       value: false
 
 
 session_config:

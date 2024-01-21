@@ -9,6 +9,70 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 
+
+
+
+# class ActionSetResponse(Action):
+#     def name(self) -> Text:
+#         return "action_set_response"
+
+#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         try:
+#             affirm_intent = tracker.latest_message['intent'].get('name') == 'affirm'
+#             response_type = tracker.get_slot('response_type')
+
+#             # Set the appropriate slot based on the response type
+#             if response_type == 'temperature':
+#                 tracker.slots['temperature'] = affirm_intent
+#             elif response_type == 'precipitation':
+#                 tracker.slots['precipitation'] = affirm_intent
+#             elif response_type == 'wind':
+#                 tracker.slots['wind'] = affirm_intent
+#             elif response_type == 'humidity':
+#                 tracker.slots['humidity'] = affirm_intent
+#             elif response_type == 'sunrise_sunset':
+#                 tracker.slots['sunrise_sunset'] = affirm_intent
+#         except Exception as e:
+#             print(f"An error occurred: {str(e)}")
+#         return []
+
+
+# # actions.py
+
+# from typing import Any, Text, Dict, List
+# from rasa_sdk import Action, Tracker
+# from rasa_sdk.events import SlotSet
+# from rasa_sdk.executor import CollectingDispatcher
+
+# actions.py
+
+# from typing import Any, Text, Dict, List
+# from rasa_sdk import Action, Tracker
+# from rasa_sdk.events import SlotSet
+# from rasa_sdk.executor import CollectingDispatcher
+
+# class ActionStoreUserResponse(Action):
+#     def name(self) -> Text:
+#         return "action_store_user_response"
+
+#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         try:
+#             affirm_intent = tracker.latest_message['intent'].get('name') == 'affirm'
+#             response_type = tracker.get_slot('response_type')
+
+#             # Create or update a dictionary to store user responses
+#             user_responses = tracker.get_slot('user_responses') or {}
+#             user_responses[response_type] = affirm_intent
+
+#             # Set the 'user_responses' slot with the updated dictionary
+#             return [SlotSet('user_responses', user_responses)]
+
+#         except Exception as e:
+#             print(f"An error occurred: {str(e)}")
+#             return []
+
+
+
 # class ActionGreet(Action):
 #     def name(self) -> Text:
 #         return "action_greet"
@@ -25,22 +89,6 @@ from rasa_sdk.executor import CollectingDispatcher
 #         # Replace with your logic to fetch temperature data
 #         dispatcher.utter_message("Here is the temperature information.")
 #         return []
-
-
-
-class ActionSetResponse(Action):
-    def name(self) -> Text:
-        return "action_set_response"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # Set the 'response_type' variable based on the user's response
-        affirm_intent = tracker.latest_message['intent'].get('name') == 'affirm'
-        response_type = tracker.get_slot('response_type')  # Change 'response_type' to the appropriate slot name
-        tracker.events.append(SlotSet(response_type, affirm_intent))
-
-        return []
-
-
 
 # class ActionGetPrecipitation(Action):
 #     def name(self) -> Text:

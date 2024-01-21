@@ -26,7 +26,6 @@ nlu:
     - sure
     - yes
 
-
 - intent: goodbye
   examples: |
     - good night
@@ -49,7 +48,26 @@ nlu:
     - I don't want the weather
     - not interested in the weather
 
+# - intent: location
+#   examples: |
+#     - tokio
+#     - amsterdam
 
+# - intent: days
+#   examples: |
+#     - today
+#     - tomorrow
+#     - today and tomorrow
+#     - 1
+#     - 2
+#     - 3
+#     - four
+#     - five
+#     - fourteen
+#     - this week
+#     - next week
+#     - this month
+  
 # - intent: temperature
 #   examples: |
 #     - Yes, I want temperature
