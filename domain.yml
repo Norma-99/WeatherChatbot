@@ -1,25 +1,110 @@
 version: "3.1"
 
+slots:
+  temperature_slot:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+        - active_loop: weather_form
+          requested_slot: temperature_slot
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+        - active_loop: weather_form
+          requested_slot: temperature_slot
+  precipitation_slot:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+        - active_loop: weather_form
+          requested_slot: precipitation_slot
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+        - active_loop: weather_form
+          requested_slot: precipitation_slot
+
+  wind_slot:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+        - active_loop: weather_form
+          requested_slot: wind_slot
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+        - active_loop: weather_form
+          requested_slot: wind_slot
+
+  humidity_slot:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+        - active_loop: weather_form
+          requested_slot: humidity_slot
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+        - active_loop: weather_form
+          requested_slot: humidity_slot
+
+  sunrise_sunset_slot:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+        - active_loop: weather_form
+          requested_slot: sunrise_sunset_slot
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+        - active_loop: weather_form
+          requested_slot: sunrise_sunset_slot
+
+forms:
+  weather_form:
+    required_slots:
+      - temperature_slot
+      - precipitation_slot
+      - wind_slot
+      - humidity_slot
+      - sunrise_sunset_slot
+
+
 intents:
   - greet
   - affirm
   - goodbye
   - deny
-  # - temperature
-  # - precipitation
-  # - wind
-  # - humidity
-  # - sunrise_sunset
+
 
 responses:
-  # utter_greet:
-  #   - text: "Hello!"
-
   utter_ask_weather:
     - text: "Would you like to know the weather?"
-
-  # utter_weather:
-  #   - text: "The weather is sunny and warm."
 
   utter_only_weather_goodbye:
     - text: "I can only provide weather information."
@@ -30,144 +115,32 @@ responses:
   utter_denied_weather:
     - text: "Sure! If you ever change your mind and want to know the weather, feel free to ask. Goodbye!"
 
-  utter_ask_temperature:
-    - text: "Would you like to know the temperatures?"
-  
-  # utter_temperature:
-  #   - text: "The temperature is 20 degrees celsius"
+  utter_visualization_dashboard: 
+    - text: "Please wait until I generate your visualization dashboard with the information provided"
 
-  utter_ask_precipitation:
+  utter_ask_weather_form_temperature_slot:
+    - text: "Would you like to know the temperature?"
+  
+  utter_ask_weather_form_precipitation_slot:
     - text: "Would you like to know the precipitation?"
-  
-  # utter_precipitation:
-  #   - text: "There will be no precipitation today"
 
-  utter_ask_wind:
+  utter_ask_weather_form_wind_slot:
     - text: "Would you like to know the wind?"
-  
-  # utter_wind:
-  #   - text: "The wind is 2mph north-west"
 
-  utter_ask_humidity:
+  utter_ask_weather_form_humidity_slot:
     - text: "Would you like to know the humidity?"
-  
-  # utter_humidity: 
-  #   - text: "The humidity today is at 93%"
 
-  utter_ask_sunrise_sunset:
+  utter_ask_weather_form_sunrise_sunset_slot:
     - text: "Would you like to know at what time is the sunrise and sunset?"
-  
-  utter_affirm: 
-    - text: "You answered YES!"
-  
-  utter_deny: 
-    - text: "You answered NO!"
 
-  # utter_sunrise_sunset:
-  #   - text: "Sunrise today is at 6:39 am and sunset is at 20:47" 
-
-  # utter_conditional_response: 
-  #   - condition: 
-  #     - type: slot
-  #       name: response
-  #       value: true 
-  #     text: "You answered YES!"
-  #   - condition:
-  #     - type: slot
-  #       name: response
-  #       value: false 
-  #     text: "You answered NO!"
 
 actions:
-  # - utter_greet
   - utter_ask_weather
-  # - utter_weather
   - utter_only_weather_goodbye
   - utter_goodbye
   - utter_denied_weather
-  - utter_ask_temperature
-  - utter_ask_precipitation
-  - utter_ask_wind
-  - utter_ask_humidity
-  - utter_ask_sunrise_sunset
-  - utter_conditional_response
-  # - action_set_response
-  # - get_responses_action
-
-
-# forms:
-#   conditional_response_form:
-#     required_slots:
-#       response:
-#         - intent: affirm
-#           not_intent: deny
-#           type: from_intent
-#           value: true
-#         - intent: deny
-#           not_intent: affirm
-#           type: from_intent
-#           value: false
-
-
-# slots:
-  # response:
-  #   type: bool
-  #   initial_value: false
-  #   influence_conversation: false
-  #   mappings:
-  #     - type: custom
-  #       action: action_store_user_response
-  # temperature_response:
-  #   type: bool
-  #   initial_value: false
-  #   influence_conversation: false
-  #   mappings:
-  #     - type: from_intent
-  #       intent: affirm
-  #       value: true
-  #     - type: from_intent
-  #       intent: deny
-  #       value: false
-  # precipitation_response:
-  #   type: bool
-  #   initial_value: false
-  #   mappings:
-  #     - type: from_intent
-  #       intent: affirm
-  #       value: true
-  #     - type: from_intent
-  #       intent: deny
-  #       value: false
-  # wind_response:
-  #   type: bool
-  #   initial_value: false
-  #   mappings:
-  #     - type: from_intent
-  #       intent: affirm
-  #       value: true
-  #     - type: from_intent
-  #       intent: deny
-  #       value: false
-  # humidity_response:
-  #   type: bool
-  #   initial_value: false
-  #   mappings:
-  #     - type: from_intent
-  #       intent: affirm
-  #       value: true
-  #     - type: from_intent
-  #       intent: deny
-  #       value: false
-  # sunrise_sunset_response:
-  #   type: bool
-  #   initial_value: false
-  #   mappings:
-  #     - type: from_intent
-  #       intent: affirm
-  #       value: true
-  #     - type: from_intent
-  #       intent: deny
-  #       value: false
+  - utter_visualization_dashboard
+  - action_custom
 
 
 session_config:

@@ -5,7 +5,7 @@
 import streamlit as st
 from rasa.core.agent import Agent
 import asyncio
-import spacy
+import requests
 
 # from weather_information import WeatherInformation
 # from viz_dash import VisualizationDashboard
@@ -13,10 +13,10 @@ import spacy
 
 
 class ChatbotController:
-    def __init__(self, model_path="./models/20231218-082112-open-edging.tar.gz"):
+    def __init__(self, endpoint_url:str = "http://0.0.0.0:5005/webhooks/rest/webhook"):
         """initialize the chatbot framework"""
-        self.agent = Agent.load(model_path)
-        print(f"Model: {self.agent}")
+        self.endpoint_url = endpoint_url
+        print(f"Endpoint: {self.endpoint_url}")
         self.responses = dict()
         st.title("Weather Chatbot")
 
@@ -27,6 +27,30 @@ class ChatbotController:
         # In the chat message I can add my own avatar if I want
         if "messages" not in st.session_state:
             st.session_state.messages = []
+    
+
+    def process_interaction(self, prompt):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        body_json = {
+            'sender': 'streamlit2',
+            'message': prompt
+        }
+
+        post_response = requests.post(self.endpoint_url, json=body_json)
+        post_response_json = post_response.json()
+        print(post_response)
+        print(post_response_json)
+
+        if post_response: 
+            bot_response = post_response_json[0]['text']
+        
+        with st.chat_message("assistant"):
+            st.session_state.messages.append({"role": "assistant", "content": bot_response})
+            self.update_responses(user_input=prompt, response=bot_response)
+            st.markdown(bot_response)
 
 
     def update_responses(self, user_input: str, response: str) -> None:
@@ -74,8 +98,9 @@ class ChatbotController:
 
         # Get user input and chatbot output
         if prompt := st.chat_input("Type your query"):
-            self.get_user_input(prompt=prompt)
-            asyncio.run(self.get_chatbot_response(prompt=prompt))
+            self.process_interaction(prompt=prompt)
+            # self.get_user_input(prompt=prompt)
+            # asyncio.run(self.get_chatbot_response(prompt=prompt))
         
         # At the end of the answers print the visualization dashboard
         # wi = WeatherInformation(self.responses)
@@ -98,15 +123,3 @@ example_user_resp = {
     "humidity": True,
     "sunrise_sunset": True
 }
-
-# import streamlit as st
-# import spacy
-
-# nlp = spacy.load("en_core_web_sm")
-
-# st.title("Simple NLP with Streamlit")
-
-# user_input = st.text_input("Enter a sentence:", "")
-# if st.button("Analyze"):
-#     doc = nlp(user_input)
-#     st.text("Tokens:", [token.text for token in doc])
