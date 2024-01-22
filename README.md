@@ -13,9 +13,9 @@ Rasa video:
 
 ## Installations
 
-```pip3 install spacy```
-```python3 -m spacy download en```
-```python -m spacy download en_core_web_sm```
+```pip3 install rasa```
+```pip3 install streamlit```
+
 
 ## Commands: 
 ```rasa shell --debug```
@@ -23,3 +23,11 @@ Rasa video:
 ```streamlit run __main__.py```
 
 ```rasa train```
+
+## To run the pipeline:
+Open 3 terminals and then execute in each terminal one of these commands (one for each terminal):
+```rasa run actions```
+
+```rasa shell --debug```
+
+```streamlit run __main__.py```

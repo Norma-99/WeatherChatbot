@@ -115,9 +115,6 @@ responses:
   utter_denied_weather:
     - text: "Sure! If you ever change your mind and want to know the weather, feel free to ask. Goodbye!"
 
-  utter_visualization_dashboard: 
-    - text: "Please wait until I generate your visualization dashboard with the information provided"
-
   utter_ask_weather_form_temperature_slot:
     - text: "Would you like to know the temperature?"
   
@@ -139,7 +136,6 @@ actions:
   - utter_only_weather_goodbye
   - utter_goodbye
   - utter_denied_weather
-  - utter_visualization_dashboard
   - action_custom
 
 

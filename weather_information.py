@@ -95,17 +95,17 @@ class WeatherInformation:
 
 
 
-# Example usage
-example_user_resp = {
-    "location": "london",
-    "days": 4,
-    "temperature": True,
-    "precipitation": True,
-    "wind": True,
-    "humidity": True,
-    "sunrise_sunset": True
-}
-wi = WeatherInformation(example_user_resp)
-weather_info = wi.get_weather_info()
+# # Example usage
+# example_user_resp = {
+#     "location": "london",
+#     "days": 4,
+#     "temperature": True,
+#     "precipitation": True,
+#     "wind": True,
+#     "humidity": True,
+#     "sunrise_sunset": True
+# }
+# wi = WeatherInformation(example_user_resp)
+# weather_info = wi.get_weather_info()
 
-print(weather_info)
+# print(weather_info)
