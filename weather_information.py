@@ -56,7 +56,7 @@ class WeatherInformation:
         """
         return [random.randint(0, 100) for _ in range(self.user_resp['days'])]
 
-    def get_sunrises_and_sunsets(self):
+    def get_sunrises_and_sunsets(self) -> list:
         """
         Get random but consistent sunrise and sunset times for the days assigned in the user_resp variable in the location selected.
         Return: a list, containing the sunrises and the sunsets for each day.

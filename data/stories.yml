@@ -8,7 +8,7 @@ stories:
     - intent: affirm
     - action: weather_form
     - active_loop: weather_form
-    - action: action_custom
+    - action: action_get_info
     - action: utter_goodbye
 
 

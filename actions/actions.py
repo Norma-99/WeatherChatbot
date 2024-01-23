@@ -7,12 +7,14 @@
 
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
+from word2number import w2n
+import dateparser
+from datetime import datetime
 
-class MyCustomAction(Action):
+class GetInfoAction(Action):
 
     def name(self) -> Text:
-        return "action_custom"
+        return "action_get_info"
 
     async def run(
         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
@@ -35,3 +37,32 @@ class MyCustomAction(Action):
 
         return []
 
+
+class GetDaysAction(Action):
+
+    def name(self) -> Text:
+        return "action_get_days"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        user_input = tracker.latest_message.get("text")
+
+        dispatcher.utter_message("I ENTERED THE ACTION")
+        return [user_input]
+        # try:
+        #     # Attempt to convert words to numbers
+        #     days = w2n.word_to_num(user_input)
+        #     message = f"You requested {days} days"
+        # except ValueError:
+        #     target_date = dateparser.parse(user_input)
+        #     if target_date:
+        #         current_date = datetime.now()
+        #         delta = target_date - current_date
+        #         days = delta.days + 2
+        #         message = f"You requested {days} days"
+        #     else:
+        #         days = "Unable to parse your days into an integer"
+        # dispatcher.utter_message(message)
+
+        # return [days]

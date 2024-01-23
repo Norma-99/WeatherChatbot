@@ -48,22 +48,34 @@ nlu:
     - I don't want the weather
     - not interested in the weather
 
-# - intent: location
-#   examples: |
-#     - tokio
-#     - amsterdam
+- intent: location
+  examples: |
+    - tokio
+    - amsterdam
+    - barcelona 
+    - malaga
+    - madrid
+    - brussels
+    - zurich
+    - munich
+    - los angeles
+    - new york
+    - toronto
+    - banglore
+    - delhi
 
-# - intent: days
-#   examples: |
-#     - today
-#     - tomorrow
-#     - today and tomorrow
-#     - 1
-#     - 2
-#     - 3
-#     - four
-#     - five
-#     - fourteen
-#     - this week
-#     - next week
-#     - this month
+- intent: days
+  examples: |
+    - today
+    - tomorrow
+    - today and tomorrow
+    - 1
+    - 2
+    - 3
+    - four
+    - five
+    - six
+    - fourteen
+    - this week
+    - next week
+    - this month

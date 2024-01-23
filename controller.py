@@ -31,7 +31,7 @@ class ChatbotController:
             st.markdown(prompt)
 
         body_json = {
-            'sender': 'streamlit13',
+            'sender': 'streamlit',
             'message': prompt
         }
 
@@ -60,6 +60,7 @@ class ChatbotController:
             split = splits[1]
             json_response = ast.literal_eval(split.replace("'", "\""))
             self.responses = json_response
+            ## CHANGE THIS IN THE FUTURE
             self.responses['location'] = 'amsterdam'
             self.responses['days'] = 7
         except: 

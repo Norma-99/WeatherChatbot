@@ -1,6 +1,25 @@
 version: "3.1"
 
 slots:
+  location_slot: 
+    type: text
+    influence_conversation: false 
+    mappings: 
+    - type: from_text
+      intent: location
+      conditions: 
+        - active_loop: weather_form
+          requested_slot: location_slot
+  days_slot: 
+    type: text
+    influence_conversation: false 
+    mappings: 
+    - type: custom
+      action: action_get_days
+      conditions: 
+        - active_loop: weather_form
+          requested_slot: days_slot
+
   temperature_slot:
     type: bool
     influence_conversation: false
@@ -88,6 +107,8 @@ slots:
 forms:
   weather_form:
     required_slots:
+      - location_slot
+      - days_slot
       - temperature_slot
       - precipitation_slot
       - wind_slot
@@ -100,6 +121,8 @@ intents:
   - affirm
   - goodbye
   - deny
+  - location
+  - days
 
 
 responses:
@@ -113,7 +136,13 @@ responses:
     - text: "Thank you for chatting. Goodbye!"
   
   utter_denied_weather:
-    - text: "Sure! If you ever change your mind and want to know the weather, feel free to ask. Goodbye!"
+    - text: "If you ever change your mind and want to know the weather, feel free to ask. Goodbye!"
+
+  utter_ask_weather_form_location_slot: 
+    - text: "In which location would you like to know the weather? [Enter only the location]"
+
+  utter_ask_weather_form_days_slot:
+    - text: "For how many days would you like to know the weather? [Enter a number, with a maximum of 14 days]"
 
   utter_ask_weather_form_temperature_slot:
     - text: "Would you like to know the temperature?"
@@ -136,7 +165,7 @@ actions:
   - utter_only_weather_goodbye
   - utter_goodbye
   - utter_denied_weather
-  - action_custom
+  - action_get_info
 
 
 session_config:
