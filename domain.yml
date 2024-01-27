@@ -14,8 +14,8 @@ slots:
     type: text
     influence_conversation: false 
     mappings: 
-    - type: custom
-      action: action_get_days
+    - type: from_text
+      intent: days
       conditions: 
         - active_loop: weather_form
           requested_slot: days_slot
@@ -166,6 +166,7 @@ actions:
   - utter_goodbye
   - utter_denied_weather
   - action_get_info
+  # - action_validate_slot_mappings
 
 
 session_config:

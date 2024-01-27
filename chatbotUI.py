@@ -2,7 +2,7 @@ import streamlit as st
 
 
 class ChatbotUI:
-    def __init__(self, plots: dict, days: str, location: str):
+    def __init__(self, plots: dict, location: str, days: str):
         """Initialize the chatbot UI"""
         self.plots = plots
         self.days = days

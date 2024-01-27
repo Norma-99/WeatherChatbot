@@ -61,7 +61,7 @@ class ChatbotController:
             json_response = ast.literal_eval(split.replace("'", "\""))
             self.responses = json_response
             ## CHANGE THIS IN THE FUTURE
-            self.responses['location'] = 'amsterdam'
+            self.responses['location'] = 'Amsterdam'
             self.responses['days'] = 7
         except: 
             raise Exception(f"The response message is not in the correct format. Response: {response}")
