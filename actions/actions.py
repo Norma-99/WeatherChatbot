@@ -39,56 +39,62 @@ class GetInfoAction(Action):
         return []
 
 
-# class ValidateWeatherForm(FormValidationAction):
+class ValidateWeatherForm(FormValidationAction):
 
-#     def name(self) -> Text:
-#         return "action_validate_slot_mappings"
+    def name(self) -> Text:
+        return "validate_weather_form"
     
-#     async def validate_location_slot(
-#         self, 
-#         slot_value: Any,
-#         dispatcher, 
-#         tracker: Tracker, 
-#         domain: Dict[Text, Any],
-#     ) -> List[Dict[Text, Any]]:
-#         user_input = tracker.latest_message.get("text")
+    async def validate_location_slot(
+        self, 
+        slot_value: Any,
+        dispatcher, 
+        tracker: Tracker, 
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        user_input = tracker.latest_message.get("text")
 
-#         # Load the spaCy model
-#         nlp = spacy.load("en_core_web_sm")
+        # Load the spaCy model
+        nlp = spacy.load("en_core_web_sm")
 
-#         # Process the text
-#         doc = nlp(user_input)
+        # Process the text
+        doc = nlp(user_input)
 
-#         # Extract entities that are classified as 'GPE' (Geopolitical entity, i.e., countries, cities, states)
-#         city_names = [ent.text for ent in doc.ents if ent.label_ == "GPE"]
-#         return {"location_slot": city_names}
+        # Extract entities that are classified as 'GPE' (Geopolitical entity, i.e., countries, cities, states)
+        city_names = [ent.text for ent in doc.ents if ent.label_ == "GPE"]
+        if city_names:
+            dispatcher.utter_message('You requested the weather in ' + str(city_names[0]))
+            print(city_names[0])
+            return {"location_slot": str(city_names[0])}
+        else:
+            dispatcher.utter_message('Could not determine the city sorry!')
+            return {"location_slot": None}
     
 
-#     async def validate_days_slot(
-#         self, 
-#         slot_value: Any,
-#         dispatcher, 
-#         tracker: Tracker, 
-#         domain: Dict[Text, Any],
-#     ) -> List[Dict[Text, Any]]:
-#         user_input = tracker.latest_message.get("text")
+    async def validate_days_slot(
+        self, 
+        slot_value: Any,
+        dispatcher, 
+        tracker: Tracker, 
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        user_input = tracker.latest_message.get("text")
 
-#         try:
-#             # Attempt to convert words to numbers
-#             days = w2n.word_to_num(user_input)
-#             message = f"You requested {days} days"
-#         except ValueError:
-#             target_date = dateparser.parse(user_input)
-#             if target_date:
-#                 current_date = datetime.now()
-#                 delta = target_date - current_date
-#                 days = delta.days + 2
-#                 message = f"You requested {days} days"
-#             else:
-#                 days = "Unable to parse your days into an integer"
-#         dispatcher.utter_message(message)
-
-#         return {"days": days}
+        try:
+            # Attempt to convert words to numbers
+            days = w2n.word_to_num(user_input)
+            message = f"You requested {days} days"
+        except ValueError:
+            target_date = dateparser.parse(user_input)
+            if target_date:
+                current_date = datetime.now()
+                delta = target_date - current_date
+                days = delta.days + 2
+                message = f"You requested {days} days"
+            else:
+                message = "Unable to parse your days into an integer"
+                days = None
+        dispatcher.utter_message(message)
+        return {"days_slot": days}
     
 
 # ### EXAMPLE USAGE LOCATION
