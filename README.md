@@ -31,3 +31,7 @@ Open 3 terminals and then execute in each terminal one of these commands (one fo
 ```rasa shell --debug```
 
 ```streamlit run __main__.py```
+
+Another alternative is to run the `execute.sh` file. 
+To do so, first give the script execute permissions: `chmod +x execute.sh`
+Then execute the file `./execute.sh`
