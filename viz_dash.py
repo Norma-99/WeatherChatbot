@@ -9,7 +9,15 @@ sns.set(style="whitegrid")
 
 class VisualizationDashboard:
     def __init__(self, viz_info: dict):
-        # Create a DataFrame
+        """
+        Initializes the VisualizationDashboard instance.
+
+        Args:
+        viz_info (dict): A dictionary containing weather information data to be visualized.
+
+        This constructor creates a DataFrame from the provided weather information and 
+        sets up a dictionary to store the generated plots.
+        """
         self.viz_info = viz_info
         self.df = pd.DataFrame({
             'Date': viz_info['days_list'],
@@ -18,21 +26,22 @@ class VisualizationDashboard:
             'Wind': viz_info['wind'],
             'Humidity': viz_info['humidity']
         })
-        # Set Date as the index
         self.df['Date'] = pd.to_datetime(self.df['Date'], format='%m/%d/%y')
         self.df.set_index('Date', inplace=True)
         self.plots = dict()
 
 
     def get_temperature_plot(self):
-        # Temperature plot
+        """
+        Generates a temperature plot.
+
+        This function creates a line and scatter plot of temperatures over time.
+        """
         fig, ax = plt.subplots(figsize=(10, 6))
         
-        # Smoothed line plot
         sns.lineplot(x=self.df.index, y=self.df['Temperature'], palette="Blues_d", ax=ax, ci=None, marker='o')
-        
-        # Overlay individual data points with temperature labels
         sns.scatterplot(x=self.df.index, y=self.df['Temperature'], color='blue', ax=ax, label='Data Points')
+
         for i, temp in enumerate(self.df['Temperature']):
             ax.text(self.df.index[i], temp, f'{temp} °C', ha='right', va='bottom', fontsize=10)
 
@@ -45,12 +54,17 @@ class VisualizationDashboard:
 
 
     def get_precipitation_plot(self):
-        # Precipitation plot
+        """
+        Generates a precipitation plot.
+
+        This function creates a bar plot to visualize precipitation data over time.
+        """
         fig, ax = plt.subplots(figsize=(10, 6))
         sns.barplot(x=self.df.index, y=self.df['Precipitation'], palette="Blues_d", ax=ax)
-        # Add text labels for precipitation values on top of each bar
+
         for i, val in enumerate(self.df['Precipitation']):
             ax.text(i, val, f'{val:.2f} mm', ha='center', va='bottom', fontsize=10)
+
         ax.set_title(f'Precipitation Over Time', fontsize=14, fontweight='bold')
         ax.set_xlabel('Date', fontsize=12)
         ax.set_ylabel(f'Precipitation (mm)', fontsize=12)
@@ -59,13 +73,15 @@ class VisualizationDashboard:
 
 
     def get_wind_plot(self):
-        # Wind plot
+        """
+        Generates a wind speed plot.
+
+        This function creates a line and scatter plot to visualize wind speed over time.
+        """
         fig, ax = plt.subplots(figsize=(10, 6))
-
         sns.lineplot(x=self.df.index, y=self.df['Wind'], palette="PuBuGn_d", ax=ax, ci=None, marker='o')
-
-        # Overlay individual data points
         sns.scatterplot(x=self.df.index, y=self.df['Wind'], color='blue', ax=ax, label='Data Points')
+
         for i, wind in enumerate(self.df['Wind']):
             ax.text(self.df.index[i], wind, f'{round(wind,2)} m/s', ha='left', va='bottom', fontsize=10)
 
@@ -77,13 +93,15 @@ class VisualizationDashboard:
 
 
     def get_humidity_plot(self):
-        # Humidity plot
+        """
+        Generates a humidity plot.
+
+        This function creates a line and scatter plot to visualize humidity levels over time.
+        """
         fig, ax = plt.subplots(figsize=(10, 6))
-
         sns.lineplot(x=self.df.index, y=self.df['Humidity'], palette="PuBuGn_d", ax=ax, ci=None, marker='o')
-
-        # Overlay individual data points
         sns.scatterplot(x=self.df.index, y=self.df['Humidity'], color='blue', ax=ax, label='Data Points')
+
         for i, hum in enumerate(self.df['Humidity']):
             ax.text(self.df.index[i], hum, f'{hum} m/s', ha='right', va='bottom', fontsize=10)
 
@@ -95,6 +113,11 @@ class VisualizationDashboard:
 
 
     def get_sunrise_sunset_plot(self):
+        """
+        Generates a sunrise and sunset times plot.
+
+        This function visualizes the sunrise and sunset times over a series of days.
+        """
         # Extracting sunrise and sunset data
         sunrise_times, sunset_times = zip(*self.viz_info['sunrise_sunset'])
 
@@ -139,6 +162,12 @@ class VisualizationDashboard:
 
 
     def run(self):
+        """
+        Generates all relevant weather plots.
+
+        This function iterates through available weather data, calls respective plotting functions,
+        and returns a dictionary of generated plots.
+        """
         plot_convertor = {
             "temperature": self.get_temperature_plot,
             "precipitation": self.get_precipitation_plot,
@@ -150,29 +179,3 @@ class VisualizationDashboard:
             if (self.viz_info[key] is not None) and (key in list(plot_convertor.keys())):
                 plot_convertor[key]()
         return self.plots
-
-
-
-sample_data = {
-    'location': 'london', 
-    'days': 4, 
-    'temperature': [6, 5, 18, 29], 
-    # 'precipitation': [8.90413883114445, 0.33233459627986184, 4.3122270213482015, 8.500102619951065], 
-    # 'wind': [14.834515085743334, 6.6653584874527505, 7.305588651356283, 13.370943297023864], 
-    # 'humidity': [22, 80, 35, 5], 
-    # 'sunrise_sunset': [('08:22AM', '08:52PM'), ('08:06AM', '06:38PM'), ('07:58AM', '07:42PM'), ('08:39AM', '07:07PM')], 
-    'days_list': ['01/09/24', '01/10/24', '01/11/24', '01/12/24']
-}
-
-sample_data = {
-    'location': 'london', 
-    'days': 4, 
-    'temperature': [6, 5, 18, 29], 
-    'precipitation': [8.90413883114445, 0.33233459627986184, 4.3122270213482015, 8.500102619951065],
-    'wind': [14.834515085743334, 6.6653584874527505, 7.305588651356283, 13.370943297023864], 
-    'humidity': [22, 80, 35, 5], 
-    'sunrise_sunset': [('08:22AM', '08:52PM'), ('08:06AM', '06:38PM'), ('07:58AM', '07:42PM'), ('08:39AM', '07:07PM')], 
-    'days_list': ['01/09/24', '01/10/24', '01/11/24', '01/12/24']
-}
-vd = VisualizationDashboard(sample_data)
-plots = vd.run()

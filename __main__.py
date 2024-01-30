@@ -1,4 +1,3 @@
-# CALL CONTROLLER.RUN()
 # streamlit run __main__.py
 from controller import ChatbotController
 

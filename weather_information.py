@@ -4,12 +4,22 @@ from datetime import datetime, timedelta
 
 class WeatherInformation:
     def __init__(self, user_resp: dict):
+        """
+        Initializes the WeatherInformation instance.
+
+        Args:
+        user_resp (dict): A dictionary containing user responses or data.
+
+        This constructor sets up the instance by storing the user-provided responses and
+        initializing a dictionary to hold processed weather information.
+        """
         self.user_resp = user_resp
         self.weather_information = dict()
 
     def get_weather_info(self):
         """
-        Look at each variable if True or False and build the weather information variable with mock data"""
+        Look at each variable if True or False and build the weather information variable with mock data
+        """
         convertor = {
             "temperature": self.get_temperatures,
             "precipitation": self.get_precipitations,
@@ -92,20 +102,3 @@ class WeatherInformation:
             next_day = today + timedelta(days=i)
             days_list.append(next_day.strftime("%m/%d/%y"))
         return days_list
-
-
-
-# # Example usage
-# example_user_resp = {
-#     "location": "london",
-#     "days": 4,
-#     "temperature": True,
-#     "precipitation": True,
-#     "wind": True,
-#     "humidity": True,
-#     "sunrise_sunset": True
-# }
-# wi = WeatherInformation(example_user_resp)
-# weather_info = wi.get_weather_info()
-
-# print(weather_info)

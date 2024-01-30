@@ -1,13 +1,7 @@
 # # This files contains your custom actions which can be used to run
-# # custom Python code.
-# #
-# # See this guide on how to implement these action:
-# # https://rasa.com/docs/rasa/custom-actions
-# # In your actions.py file
 
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker, FormValidationAction
-from rasa_sdk.events import SlotSet
 from word2number import w2n
 import dateparser
 from datetime import datetime
@@ -16,6 +10,11 @@ import spacy
 
 
 class GetInfoAction(Action):
+    """
+    Custom Action to get information based on the user's request.
+    This action extracts slot values for weather-related parameters and
+    sends them back to the user.
+    """
 
     def name(self) -> Text:
         return "action_get_info"
@@ -40,6 +39,11 @@ class GetInfoAction(Action):
 
 
 class ValidateWeatherForm(FormValidationAction):
+    """
+    Custom Action for form validation in weather-related queries.
+    It contains methods to validate the location and days slots
+    based on the user's input.
+    """
 
     def name(self) -> Text:
         return "validate_weather_form"
@@ -96,13 +100,3 @@ class ValidateWeatherForm(FormValidationAction):
         dispatcher.utter_message(message)
         return {"days_slot": days}
     
-
-# ### EXAMPLE USAGE LOCATION
-# # Example usage
-# # text1 = "I want to know Amsterdam."
-# # text2 = "I live in Ciudad de Mexico."
-# # text3 = "I want to know the weather in Berlin and Dubai"
-
-# # for text in [text1, text2, text3]:
-# #     cities = extract_city_names(text)
-# #     print(f"Cities in '{text}': {cities}")

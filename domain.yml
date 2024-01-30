@@ -1,5 +1,8 @@
 version: "3.1"
 
+
+# Defines data slots to store user inputs.
+# Each slot is defined with its type, influence on the conversation, and mappings.
 slots:
   location_slot: 
     type: text
@@ -102,6 +105,8 @@ slots:
         - active_loop: weather_form
           requested_slot: sunrise_sunset_slot
 
+
+# Defines a form to collect all required slots for a weather query.
 forms:
   weather_form:
     required_slots:
@@ -114,6 +119,7 @@ forms:
       - sunrise_sunset_slot
 
 
+# Lists the intents that the chatbot recognizes.
 intents:
   - greet
   - affirm
@@ -123,6 +129,7 @@ intents:
   - days
 
 
+# Defines template responses the bot can use.
 responses:
   utter_ask_weather:
     - text: "Would you like to know the weather?"
@@ -158,15 +165,17 @@ responses:
     - text: "Would you like to know at what time is the sunrise and sunset?"
 
 
+# Lists the actions that the bot can execute.
 actions:
   - utter_ask_weather
   - utter_only_weather_goodbye
   - utter_goodbye
   - utter_denied_weather
-  - action_get_info
-  - validate_weather_form
+  - action_get_info   # A custom action to provide weather information.
+  - validate_weather_form   # A custom form validation action.
 
 
+# Configuration for user session management.
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
