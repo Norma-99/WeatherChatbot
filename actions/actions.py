@@ -25,7 +25,10 @@ class GetInfoAction(Action):
         
         # Extract slot values
         slot_values = {
+            "location":tracker.get_slot("location_slot"),
+            "days": tracker.get_slot("days_slot"),
             "temperature": tracker.get_slot("temperature_slot"),
+            "sunny": tracker.get_slot("sunny_slot"),
             "precipitation": tracker.get_slot("precipitation_slot"),
             "wind": tracker.get_slot("wind_slot"),
             "humidity": tracker.get_slot("humidity_slot"),

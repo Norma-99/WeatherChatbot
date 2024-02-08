@@ -19,6 +19,10 @@ To execute the code first there are some libraries that should be installed.
 
 ```pip3 install seaborn```
 
+```pip3 install spacy```
+
+```pip3 install word2number```
+
 
 ## To run the pipeline 
 
@@ -40,4 +44,4 @@ Another alternative is to run the `execute.sh` file.
 
 To do so, first give the script execute permissions: `chmod +x execute.sh`
 
-Then execute the file `./execute.sh`
+Then execute the file `./execute.sh` and wait for 30 seconds so it all initializes. 

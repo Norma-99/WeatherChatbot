@@ -37,6 +37,24 @@ slots:
       conditions:
         - active_loop: weather_form
           requested_slot: temperature_slot
+
+  sunny_slot:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+        - active_loop: weather_form
+          requested_slot: sunny_slot
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+        - active_loop: weather_form
+          requested_slot: sunny_slot
+
   precipitation_slot:
     type: bool
     influence_conversation: false
@@ -113,6 +131,7 @@ forms:
       - location_slot
       - days_slot
       - temperature_slot
+      - sunny_slot
       - precipitation_slot
       - wind_slot
       - humidity_slot
@@ -151,6 +170,9 @@ responses:
 
   utter_ask_weather_form_temperature_slot:
     - text: "Would you like to know the temperature?"
+
+  utter_ask_weather_form_sunny_slot:
+    - text: "Would you like to know if its sunny or cloudy?"
   
   utter_ask_weather_form_precipitation_slot:
     - text: "Would you like to know the precipitation?"

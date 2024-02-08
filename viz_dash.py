@@ -22,6 +22,7 @@ class VisualizationDashboard:
         self.df = pd.DataFrame({
             'Date': viz_info['days_list'],
             'Temperature': viz_info['temperature'],
+            'Sunny': viz_info['sunny'],
             'Precipitation': viz_info['precipitation'],
             'Wind': viz_info['wind'],
             'Humidity': viz_info['humidity']
@@ -53,6 +54,31 @@ class VisualizationDashboard:
         self.plots['temperature'] = fig
 
 
+    def get_sunny_plot(self):
+        """
+        Generates a plot displaying the number of sunny hours for each day.
+        """
+        # Ensure the 'Sunny' column exists in the DataFrame
+        if 'Sunny' not in self.df.columns:
+            print("Sunny data not available in the dataset.")
+            return
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        # Creating a bar plot for sunny hours
+        sns.barplot(x=self.df.index, y=self.df['Sunny'], palette="YlOrBr", ax=ax)
+
+        # Adding text labels for each bar to show the exact number of sunny hours
+        for i, val in enumerate(self.df['Sunny']):
+            ax.text(i, val, f'{val} hrs', ha='center', va='bottom', fontsize=10)
+        
+        ax.set_title('Sunny Hours Per Day', fontsize=14, fontweight='bold')
+        ax.set_xlabel('Date', fontsize=12)
+        ax.set_ylabel('Sunny Hours', fontsize=12)
+        ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+        self.plots['sunny'] = fig
+
+
     def get_precipitation_plot(self):
         """
         Generates a precipitation plot.
@@ -79,7 +105,7 @@ class VisualizationDashboard:
         This function creates a line and scatter plot to visualize wind speed over time.
         """
         fig, ax = plt.subplots(figsize=(10, 6))
-        sns.lineplot(x=self.df.index, y=self.df['Wind'], palette="PuBuGn_d", ax=ax, ci=None, marker='o')
+        sns.lineplot(x=self.df.index, y=self.df['Wind'], palette="Blues_d", ax=ax, ci=None, marker='o')
         sns.scatterplot(x=self.df.index, y=self.df['Wind'], color='blue', ax=ax, label='Data Points')
 
         for i, wind in enumerate(self.df['Wind']):
@@ -99,7 +125,7 @@ class VisualizationDashboard:
         This function creates a line and scatter plot to visualize humidity levels over time.
         """
         fig, ax = plt.subplots(figsize=(10, 6))
-        sns.lineplot(x=self.df.index, y=self.df['Humidity'], palette="PuBuGn_d", ax=ax, ci=None, marker='o')
+        sns.lineplot(x=self.df.index, y=self.df['Humidity'], palette="Blues_d", ax=ax, ci=None, marker='o')
         sns.scatterplot(x=self.df.index, y=self.df['Humidity'], color='blue', ax=ax, label='Data Points')
 
         for i, hum in enumerate(self.df['Humidity']):
@@ -170,6 +196,7 @@ class VisualizationDashboard:
         """
         plot_convertor = {
             "temperature": self.get_temperature_plot,
+            "sunny": self.get_sunny_plot,
             "precipitation": self.get_precipitation_plot,
             "wind": self.get_wind_plot,
             "humidity": self.get_humidity_plot,

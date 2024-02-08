@@ -22,6 +22,7 @@ class WeatherInformation:
         """
         convertor = {
             "temperature": self.get_temperatures,
+            "sunny": self.get_sunny,
             "precipitation": self.get_precipitations,
             "wind": self.get_winds,
             "humidity": self.get_humidities,
@@ -44,13 +45,34 @@ class WeatherInformation:
         Return: a list of temperatures for each day.
         """
         return [random.randint(0, 30) for _ in range(self.user_resp['days'])]
+    
+    def get_sunny(self) -> list:
+        """
+        Get the hours of sun for each day assigned in the user_resp variable in the location selected.
+        A super sunny day will have more than 10 hours of sun, which implies no rain.
+        Return: a list of sun hours for each day.
+        """
+        return [random.randint(0, 12) for _ in range(self.user_resp['days'])]
+
 
     def get_precipitations(self) -> list:
         """
         Get the precipitations mm of the days assigned in the user_resp variable in the location selected.
+        On super sunny days (sun hours > 10), precipitation will be set to 0.
         Return: a list of precipitations for each day.
         """
-        return [random.uniform(0, 10) for _ in range(self.user_resp['days'])]
+        # Ensure that the sunny information is generated first
+        if "sunny" not in self.weather_information:
+            return [random.uniform(0, 10) for _ in range(self.user_resp['days'])]
+        
+        precipitations = []
+        for sun_hours in self.weather_information["sunny"]:
+            if sun_hours > 10:  # Super sunny day check
+                precipitations.append(0)  # No rain on super sunny days
+            else:
+                precipitations.append(random.uniform(0, 10))
+        return precipitations
+
 
     def get_winds(self) -> list:
         """
